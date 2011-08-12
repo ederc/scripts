@@ -126,22 +126,64 @@ for iter in ['singleRed','totalRed','zero','time','memory','size']:
 
 for k in data:
   print data
-  tex = k + '.tex'
-  tex = open(tex,'w')
-  tex.write('\\begin{table}\n\\begin{centering}\n\
-\t\\begin{tabular}{|c|r|r|r|r|r|}\n\t\t\hline\n\
-\t\tTest case & $\sigstd$ & $\sigstdr$ & $\\ap$ & $\mm$ & $\ggv$\\\ \n\
-\t\t\\hline\n\t\t\\hline\n')
-  
-# we insert the data and sort it by the names of the examples
-# using the above defined natural sort key such that, for 
-# example, "Katsura 9" is smaller than "Katsura 10"
-  for l in sorted(data[k].iterkeys(),key=natural_key):
-    tex.write('\t\t' + l)
-    for m in data[k][l]:
-      tex.write(' & ' + data[k][l][m])
-    tex.write('\\\ \n\t\t\\hline\n')
-  tex.write('\t\\end{tabular}\n\t\\par\n\\end{centering}\n\n\\caption{')
+    # we want to have the data being aligned at the
+    # decimal dot
+    # => this only happens for
+    #    MEMORY & TIMINGS!
+    # => we need to make three parts of our number:
+    #    a) the part bigger 1
+    #    b) the dot
+    #    c) the part smaller 1
+    # since we are coloring the numbers, we need to 
+    # color each part (also the dot!)!
+  if k in ['memory','time']:
+    tex = k + '.tex'
+    tex = open(tex,'w')
+    tex.write('\\begin{table}\n\\begin{centering}\n\
+  \t\\begin{tabular}{|c|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|}\n\t\t\hline\n\
+  \t\tTest case & \\multicolumn{1}{c}{$\sigstd$} & \\multicolumn{1}{c}{$\sigstdr$} \
+  & \\multicolumn{1}{c}{$\\ap$} & \\multicolumn{1}{c}{$\mm$} \
+  & \\multicolumn{1}{c}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
+    
+  # we insert the data and sort it by the names of the examples
+  # using the above defined natural sort key such that, for 
+  # example, "Katsura 9" is smaller than "Katsura 10"
+    for l in sorted(data[k].iterkeys(),key=natural_key):
+      tex.write('\t\t' + l)
+      for m in data[k][l]:
+        # get substring containing coloring information
+        col1 = data[k][l][m][:10]
+        col2 = '}'
+        tmp = data[k][l][m].split('.')
+        val1 = tmp[0] + col2
+        
+        # we cannot colorize the dot as otherwise dcolumn gets bollocks!
+        #val2 = col1 + '.' + col2
+        val2 = '.'
+        val3 = col1 + tmp[1]
+        tex.write(' & ' + val1 + val2 + val3)
+
+      tex.write('\\\ \n\t\t\\hline\n')
+    tex.write('\t\\end{tabular}\n\t\\par\n\\end{centering}\n\n\\caption{')
+  else:
+    tex = k + '.tex'
+    tex = open(tex,'w')
+    tex.write('\\begin{table}\n\\begin{centering}\n\
+  \t\\begin{tabular}{|c|r|r|r|r|r|}\n\t\t\hline\n\
+  \t\tTest case & $\sigstd$ & $\sigstdr$ \
+  & $\\ap$ & $\mm$ \
+  & $\ggv$\\\ \n\t\t\\hline\n\t\t\\hline\n')
+    
+  # we insert the data and sort it by the names of the examples
+  # using the above defined natural sort key such that, for 
+  # example, "Katsura 9" is smaller than "Katsura 10"
+    for l in sorted(data[k].iterkeys(),key=natural_key):
+      tex.write('\t\t' + l)
+      for m in data[k][l]:
+
+        tex.write(' & ' + data[k][l][m])
+      tex.write('\\\ \n\t\t\\hline\n')
+    tex.write('\t\\end{tabular}\n\t\\par\n\\end{centering}\n\n\\caption{')
 # fills the caption of the tables depending on the corresponding
 # data presented
   if k == 'singleRed':
@@ -160,6 +202,7 @@ of the algorithms.')
     tex.write('Size of the resulting standard basis.')
   tex.write('}\n\
 \\label{tab:ch5:' + k + '}')
+  tex.write('\n\\end{table}')
   tex.close()
 
 # as a last step we merge all resulting latex tables in
@@ -173,7 +216,7 @@ for t in texs:
 
 # if complete.tex already exists it should not be
 # looped over!
-  if t != 'complete.tex':
+  if t in ['singleRed.tex','totalRed.tex','size.tex','zero.tex','time.tex','memory.tex']:
     t = open(t,'r')
     lines = t.readlines()
     for l in lines:
