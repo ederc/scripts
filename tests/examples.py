@@ -10,6 +10,13 @@
 # for sorting in the the natural way, i.e. "k11" is greater than "k2"
 # this is needed for sorting the examples computed, e.g. 
 # "Katsura 10" should be listed after "Katsura 9", but before "Katsura 11"
+
+############################################################
+# TOODOO: Need also the variables resp. the ring data
+#         to define the ideals correclty!    
+############################################################
+
+
 import re
 def natural_key(string_):
   """See http://www.codinghorror.com/blog/archives/001018.html"""
@@ -24,6 +31,7 @@ tst = glob.glob(pathtst)
 
 data = {}
 ex = {}
+linelength = 45
 
 for t in tst:
   f = open(t,'r')
@@ -81,10 +89,30 @@ for k in sorted(ex.iterkeys(),key=natural_key):
     sl = l.split('=')
     print sl
     s = sl[1].replace('\012','')
-    s = s.replace('^','\\mbox{\\textasciicircum}')
     if i<len(lines):
-      tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & \
-{\\tt '+ s + '}\\\ \n')
+      tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & ')
+      w = len(s)
+      if w<=linelength:
+        s = s.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ s + '}\\\ \n')
+      else:
+        sp = s[:linelength]
+        sq = s[(linelength+1):]
+        # need to find the index of the next + or -
+        # to cut at this point! TOODOO
+        sp = sp.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ sp + '}\\\ \n')
+        tex.write(' & &{} ')
+        w = len(s)
+        while w>linelength:
+          sp = s[:linelength]
+          s = s[(linelength+1):]
+          sp = sp.replace('^','\\mbox{\\textasciicircum}')
+          tex.write('{\\tt '+ sp + '}\\\ \n')
+          tex.write(' & &{} ')
+          w = len(s)
+        s = s.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ s + '}\\\ \n')
     else:
       tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & \
 {\\tt '+ s + '} \n')
