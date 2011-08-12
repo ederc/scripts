@@ -118,8 +118,8 @@ for iter in ['singleRed','totalRed','zero','time','memory','size']:
       else:
         tempDatTmp = tempDat[key]
         tempDat[key]= '{\color{' + str(col) + '}' + val + '}'
-        col += 1
         colTmp = col
+        col += 1
 
 # at this point all the data is generated and added to "data"
 # next we need to extract latex code out of it
@@ -141,9 +141,9 @@ for k in data:
     tex = open(tex,'w')
     tex.write('\\begin{table}\n\\begin{centering}\n\
   \t\\begin{tabular}{|c|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|}\n\t\t\hline\n\
-  \t\tTest case & \\multicolumn{1}{c}{$\sigstd$} & \\multicolumn{1}{c}{$\sigstdr$} \
-  & \\multicolumn{1}{c}{$\\ap$} & \\multicolumn{1}{c}{$\mm$} \
-  & \\multicolumn{1}{c}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
+  \t\tTest case & \\multicolumn{1}{|c|}{$\sigstd$} & \\multicolumn{1}{|c|}{$\sigstdr$} \
+  & \\multicolumn{1}{|c|}{$\\ap$} & \\multicolumn{1}{|c|}{$\mm$} \
+  & \\multicolumn{1}{|c|}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
     
   # we insert the data and sort it by the names of the examples
   # using the above defined natural sort key such that, for 
@@ -169,7 +169,7 @@ for k in data:
     tex = k + '.tex'
     tex = open(tex,'w')
     tex.write('\\begin{table}\n\\begin{centering}\n\
-  \t\\begin{tabular}{|c|r|r|r|r|r|}\n\t\t\hline\n\
+  \t\\begin{tabular}{|c|c|c|c|c|c|}\n\t\t\hline\n\
   \t\tTest case & $\sigstd$ & $\sigstdr$ \
   & $\\ap$ & $\mm$ \
   & $\ggv$\\\ \n\t\t\\hline\n\t\t\\hline\n')
