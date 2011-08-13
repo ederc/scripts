@@ -44,5 +44,6 @@ do
 # write it back to the expresults file
   #tim=`echo "scale=3; $tim / 1000" | bc`;
   echo "$tim millisec" >> tests/${1}.res;
-  echo "$i done."
+  echo -n "$i done @"
+  date
 done
