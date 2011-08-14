@@ -31,7 +31,7 @@ tst = glob.glob(pathtst)
 
 data = {}
 ex = {}
-linelength = 45
+linelength = 50
 
 for t in tst:
   f = open(t,'r')
@@ -63,12 +63,16 @@ by their names in increasing order. The code is given in \
 the \\singular language and is the exact data used for \
 the computations done. \n\nNote that ``\\verb?-h?\'\' at \
 the ending of an example\'s name indicates that the \
-corresponding ideal is homogeneous.\n\n\\noindent\n')
+corresponding ideal is homogeneous.\n\n')
 for k in sorted(ex.iterkeys(),key=natural_key):
-  print k
   data[k] = list()
   d = "LIB\\\"f5ex2.lib\\\";" + ex[k] + "i;$"
-  print d
+  ####################################################
+  # still needs:
+  # 1. numvars(basering)
+  # 2. varstr(basering)
+  # This data needs to be added in thesis, too!
+  ####################################################
 
   # we preload data to 'exPhd.txt'
 
@@ -78,16 +82,15 @@ for k in sorted(ex.iterkeys(),key=natural_key):
   
   # write example name
   
-  tex.write('{\\tt ' + k + '}\n\n') 
-  
+  tex.write('\\newpage\n\n\\large\n\n')
+  tex.write('\\begin{center}\n'+ k + '\n\end{center}\n')
   tex.write('\\begin{center}\n')
-  tex.write('$\n\\begin{array}{lcl}\n') 
+  tex.write('\\small$\n\\begin{array}{lcl}\n') 
   #tex.write('\\begin{align*}')
   # write example code
   i = 1
   for l in lines:
     sl = l.split('=')
-    print sl
     s = sl[1].replace('\012','')
     if i<len(lines):
       tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & ')
@@ -96,8 +99,13 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         s = s.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ s + '}\\\ \n')
       else:
-        sp = s[:linelength]
-        sq = s[(linelength+1):]
+        idx1 = s.find("+",linelength-10)
+        idx2 = s.find("-",linelength-10)
+        idx = min(idx1,idx2)
+        if idx < 0:
+          idx = max(idx1,idx2)
+        sp = s[:idx]
+        s = s[(idx):]
         # need to find the index of the next + or -
         # to cut at this point! TOODOO
         sp = sp.replace('^','\\mbox{\\textasciicircum}')
@@ -105,8 +113,13 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         tex.write(' & &{} ')
         w = len(s)
         while w>linelength:
-          sp = s[:linelength]
-          s = s[(linelength+1):]
+          idx1 = s.find("+",linelength-10)
+          idx2 = s.find("-",linelength-10)
+          idx = min(idx1,idx2)
+          if idx < 0:
+            idx = max(idx1,idx2)
+          sp = s[:idx]
+          s = s[(idx):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
           tex.write('{\\tt '+ sp + '}\\\ \n')
           tex.write(' & &{} ')
@@ -114,11 +127,42 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         s = s.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ s + '}\\\ \n')
     else:
-      tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & \
-{\\tt '+ s + '} \n')
+      tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & ')
+      w = len(s)
+      if w<=linelength:
+        s = s.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ s + '} \n')
+      else:
+        idx1 = s.find("+",linelength-10)
+        idx2 = s.find("-",linelength-10)
+        idx = min(idx1,idx2)
+        if idx < 0:
+          idx = max(idx1,idx2)
+        sp = s[:idx]
+        s = s[(idx):]
+        # need to find the index of the next + or -
+        # to cut at this point! TOODOO
+        sp = sp.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ sp + '}\\\ \n')
+        tex.write(' & &{} ')
+        w = len(s)
+        while w>linelength:
+          idx1 = s.find("+",linelength-10)
+          idx2 = s.find("-",linelength-10)
+          idx = min(idx1,idx2)
+          if idx < 0:
+            idx = max(idx1,idx2)
+          sp = s[:idx]
+          s = s[(idx):]
+          sp = sp.replace('^','\\mbox{\\textasciicircum}')
+          tex.write('{\\tt '+ sp + '}\\\ \n')
+          tex.write(' & &{} ')
+          w = len(s)
+        s = s.replace('^','\\mbox{\\textasciicircum}')
+        tex.write('{\\tt '+ s + '} \n')
     i = i+1
 
   #tex.write('\\end{align*}')
   tex.write('\\end{array}\n$\n') 
-  tex.write('\\end{center}')
-  tex.write('\n\n')
+  tex.write('\\end{center}\n\n')
+tex.write('\\normalsize')
