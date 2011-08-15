@@ -1,9 +1,10 @@
 system("--allow-net", 1);
 system("--min-time", "0.001");
 system("--ticks-per-sec", 1000);
-LIB"../LIB/f5ex2.lib";
-sprintf("Example: Katsura-11");
-katsuran(11);
+LIB"LIB/f5ex2.lib";
+sprintf("Example: Cyclic-7-h");
+cyclicnh(7);
+//schrans_troost();
 bigint mem2 = memory(2);
 int tr = timer;
 ideal g = f5e(i);

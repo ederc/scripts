@@ -2,7 +2,7 @@ system("--allow-net", 1);
 system("--min-time", "0.001");
 system("--ticks-per-sec", 1000);
 LIB"LIB/f5ex2.lib";
-sprintf("Example: F-744-h");
+sprintf("Example: F-744");
 f744();
 //schrans_troost();
 bigint mem2 = memory(2);
