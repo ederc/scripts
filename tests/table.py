@@ -141,9 +141,9 @@ for k in data:
     tex = open(tex,'w')
     tex.write('\\begin{table}\n\\begin{centering}\n\
   \t\\begin{tabular}{|c|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|}\n\t\t\hline\n\
-  \t\tTest case & \\multicolumn{1}{|c|}{$\sigstd$} & \\multicolumn{1}{|c|}{$\sigstdr$} \
-  & \\multicolumn{1}{|c|}{$\\ap$} & \\multicolumn{1}{|c|}{$\mm$} \
-  & \\multicolumn{1}{|c|}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
+  \t\tTest case & \\multicolumn{1}{c|}{$\sigstd$} & \\multicolumn{1}{c|}{$\sigstdr$} \
+  & \\multicolumn{1}{c|}{$\\ap$} & \\multicolumn{1}{c|}{$\mm$} \
+  & \\multicolumn{1}{c|}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
     
   # we insert the data and sort it by the names of the examples
   # using the above defined natural sort key such that, for 
