@@ -195,9 +195,11 @@ of the algorithms.')
   elif k == 'zero':
     tex.write('Number of zero reductions computed by the algorithms.')
   elif k == 'time':
-    tex.write('Time needed to compute the examples, given in seconds.')
+    tex.write('Time needed to compute a standard basis of the respective test
+case, given in seconds.')
   elif k == 'memory':
-    tex.write('Memory used to compute the examples, given in Megabyte.')
+    tex.write('Memory used to compute a standard basis of the respective test
+case, given in Megabyte.')
   elif k == 'size':
     tex.write('Size of the resulting standard basis.')
   tex.write('}\n\
