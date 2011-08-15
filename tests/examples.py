@@ -66,7 +66,7 @@ the ending of an example\'s name indicates that the \
 corresponding ideal is homogeneous.\n\n')
 for k in sorted(ex.iterkeys(),key=natural_key):
   data[k] = list()
-  d = "LIB\\\"f5ex2.lib\\\";" + ex[k] + "i;$"
+  d = "LIB\\\"f5ex2.lib\\\";" + ex[k] + "nvars(basering);varstr(basering);i;$"
   ####################################################
   # still needs:
   # 1. numvars(basering)
@@ -83,13 +83,32 @@ for k in sorted(ex.iterkeys(),key=natural_key):
   # write example name
   
   tex.write('\\newpage\n\n\\large\n\n')
-  tex.write('\\begin{center}\n'+ k + '\n\end{center}\n')
+  tex.write('\\begin{center}\n'+ k + '\n\end{center}\n\\small\n')
+  nvars = lines[0].replace('\012','')
+  varstr = lines[1].replace('\012','')
+  tex.write('$\n\\begin{array}{ll}\n')
+  tex.write('\\textrm{Polynomial ring in ' + nvars + ' variables:} &')
+  w = len(varstr)
+  while w>linelength-5:
+    idx = varstr.find(",",linelength-7)
+    if idx < 0:
+      idx = max(idx,0)
+    sp = varstr[:idx+1]
+    varstr = varstr[(idx+1):]
+    sp = sp.replace('^','\\mbox{\\textasciicircum}')
+    tex.write('{\\tt '+ sp + '}\\\ \n')
+    tex.write(' & ')
+    w = len(varstr)
+  varstr = varstr.replace('^','\\mbox{\\textasciicircum}')
+  tex.write('{\\tt '+ varstr + '} \n')
+  tex.write('\\end{array}\n$\n')
   tex.write('\\begin{center}\n')
-  tex.write('\\small$\n\\begin{array}{lcl}\n') 
+  tex.write('$\n')
+  tex.write('\\begin{array}{lcl}\n') 
   #tex.write('\\begin{align*}')
   # write example code
-  i = 1
-  for l in lines:
+  i = 2
+  for l in lines[2:]:
     sl = l.split('=')
     s = sl[1].replace('\012','')
     if i<len(lines):
@@ -104,8 +123,8 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         idx = min(idx1,idx2)
         if idx < 0:
           idx = max(idx1,idx2)
-        sp = s[:idx]
-        s = s[(idx):]
+        sp = s[:idx+1]
+        s = s[(idx+1):]
         # need to find the index of the next + or -
         # to cut at this point! TOODOO
         sp = sp.replace('^','\\mbox{\\textasciicircum}')
@@ -118,11 +137,11 @@ for k in sorted(ex.iterkeys(),key=natural_key):
           idx = min(idx1,idx2)
           if idx < 0:
             idx = max(idx1,idx2)
-          sp = s[:idx]
-          s = s[(idx):]
+          sp = s[:idx+1]
+          s = s[(idx+1):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
           tex.write('{\\tt '+ sp + '}\\\ \n')
-          tex.write(' & &{} ')
+          tex.write(' & & ')
           w = len(s)
         s = s.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ s + '}\\\ \n')
@@ -138,13 +157,13 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         idx = min(idx1,idx2)
         if idx < 0:
           idx = max(idx1,idx2)
-        sp = s[:idx]
-        s = s[(idx):]
+        sp = s[:idx+1]
+        s = s[(idx+1):]
         # need to find the index of the next + or -
         # to cut at this point! TOODOO
         sp = sp.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ sp + '}\\\ \n')
-        tex.write(' & &{} ')
+        tex.write(' & & ')
         w = len(s)
         while w>linelength:
           idx1 = s.find("+",linelength-10)
@@ -152,11 +171,11 @@ for k in sorted(ex.iterkeys(),key=natural_key):
           idx = min(idx1,idx2)
           if idx < 0:
             idx = max(idx1,idx2)
-          sp = s[:idx]
-          s = s[(idx):]
+          sp = s[:idx+1]
+          s = s[(idx+1):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
           tex.write('{\\tt '+ sp + '}\\\ \n')
-          tex.write(' & &{} ')
+          tex.write(' & & ')
           w = len(s)
         s = s.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ s + '} \n')
@@ -165,4 +184,8 @@ for k in sorted(ex.iterkeys(),key=natural_key):
   #tex.write('\\end{align*}')
   tex.write('\\end{array}\n$\n') 
   tex.write('\\end{center}\n\n')
+  exphd.close()
 tex.write('\\normalsize')
+
+# computations done, remove temporary files
+os.system('rm -f exPhd.txt')
