@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n6d003s011%2</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e,f,g]
+</vars>
+<basis>
+  [b*g-13*c*g+17*d*g-27*e*g+22*f*g, a*g-50*c*g+28*d*g-36*e*g-44*f*g, e*f-24*c*g+21*d*g+9*e*g-7*f*g, d*f-41*c*g+25*d*g+21*e*g-6*f*g, c*f-27*c*g+37*d*g+7*e*g-18*f*g, b*f-37*c*g+46*d*g+17*e*g-27*f*g, a*f+20*c*g+30*d*g+6*e*g+44*f*g, d*e+46*c*g-20*d*g+28*e*g+46*f*g, c*e+26*c*g+18*d*g+26*e*g+30*f*g, b*e+8*c*g+40*d*g+40*e*g+12*f*g, a*e+33*c*g-35*d*g+33*e*g-32*f*g, d^2-24*e^2-44*f^2+39*c*g+31*d*g+3*e*g+2*f*g+44*g^2, c*d-12*c*g+28*d*g+47*e*g+37*f*g, b*d+43*c*g+25*d*g-47*e*g-22*f*g, a*d+35*c*g-19*d*g-13*e*g-4*f*g, c^2-39*e^2+17*f^2-40*c*g-2*d*g-34*e*g-10*f*g+50*g^2, b*c-41*c*g-14*d*g-19*e*g-28*f*g, a*c-16*c*g+d*g-11*e*g+25*f*g, b^2+9*e^2+11*f^2-44*c*g+32*d*g+39*e*g-14*f*g-10*g^2, a*b-49*c*g+44*d*g+29*e*g-25*f*g, a^2-46*e^2+17*f^2+38*c*g-8*d*g-47*e*g+7*f*g+18*g^2]
+</basis>
+

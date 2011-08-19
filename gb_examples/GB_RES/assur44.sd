@@ -1,0 +1,24 @@
+<Type>
+INTPS
+</Type>
+<Key>
+assur44
+</Key>
+<basis>
+  [ca^2+sa^2-1,cb^2+sb^2-1,cc^2+sc^2-1,cd^2+sd^2-1,8*ca*cb*cc+8*cb*cc*sa-8*ca*cc*sb+8*cc*sa*sb-8*ca*cb*sc+8*cb*sa*sc-8*ca*sb*sc-8*sa*sb*sc-16*ca*cb+24*cb*cc+12*cb*sa-12*ca*sb-24*cc*sb-16*sa*sb-24*cb*sc-24*sb*sc+24*ca-48*cb-4*cc-36*sb+28*sc+48,-8*ca*cb*cd+16*cb*cd*sa-16*ca*cd*sb-8*cd*sa*sb+16*ca*cb*sd+8*cb*sa*sd-8*ca*sb*sd+16*sa*sb*sd+8*ca*cb-32*cb*cd+12*cb*sa-12*ca*sb+86*cd*sb+8*sa*sb-86*cb*sd-32*sb*sd-28*ca-73*cb+16*cd-30*sa+12*sb+28*sd+112,280*ca*cb*cc-980*ca*cb*cd-1400*cb*cc*sa-1960*cb*cd*sa+1400*ca*cc*sb+1960*ca*cd*sb+280*cc*sa*sb-980*cd*sa*sb+1400*ca*cb*sc+280*cb*sa*sc-280*ca*sb*sc+1400*sa*sb*sc-1960*ca*cb*sd+980*cb*sa*sd-980*ca*sb*sd-1960*sa*sb*sd+56*ca*cb+6860*cb*cc+6860*cb*cd+6300*cc*cd+2268*cb*sa-2268*ca*sb+1540*cc*sb+8330*cd*sb+56*sa*sb+1540*cb*sc-4900*cd*sc-6860*sb*sc-8330*cb*sd-4900*cc*sd+6860*sb*sd-6300*sc*sd+784*ca-10094*cb-8060*cc-11480*cd-1764*sa-4788*sb+1820*sc+5390*sd+19798,280*cc*cd-280*sc*sd-240*cc-336*cd+391]
+</basis>
+<char>
+  0
+</char>
+<vars>
+  [ca, cb, cc, cd, sa, sb, sc, sd]
+</vars>
+<dlist>
+  [2,2,2,2,3,3,3,2]
+</dlist>
+<isHomog>
+0
+</isHomog>
+<llist>
+  [3,3,3,3,22,23,41,5]
+</llist>

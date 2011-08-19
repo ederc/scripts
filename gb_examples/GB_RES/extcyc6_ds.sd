@@ -1,0 +1,24 @@
+<Type>
+INTPS
+</Type>
+<Key>
+extcyc6_ds
+</Key>
+<basis>
+  [1+w^6,w+x1+x2+x3+x4+x5+x6,w^2+x1*x2+x2*x3+x3*x4+x4*x5+x1*x6+x5*x6,w^3+x1*x2*x3+x2*x3*x4+x3*x4*x5+x1*x2*x6+x1*x5*x6+x4*x5*x6]
+</basis>
+<char>
+  0
+</char>
+<vars>
+  [w, x1, x2, x3, x4, x5, x6]
+</vars>
+<dlist>
+  [6,1,2,3]
+</dlist>
+<isHomog>
+0
+</isHomog>
+<llist>
+  [2,7,7,7]
+</llist>

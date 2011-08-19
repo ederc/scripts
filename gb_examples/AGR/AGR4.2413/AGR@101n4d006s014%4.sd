@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n4d006s014%4</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e]
+</vars>
+<basis>
+  [a*b+18*a*c+44*b*c-40*a*d+28*b*d-41*c*d-46*a*e+11*b*e-29*c*e-47*d*e, a^4+3*b^4+45*a^3*c+40*b^3*c-41*a^2*c^2-46*b^2*c^2+15*a*c^3-36*b*c^3+10*c^4-49*a^3*d+47*b^3*d+42*a^2*c*d-19*b^2*c*d+33*a*c^2*d-17*b*c^2*d-14*c^3*d-42*a^2*d^2-37*b^2*d^2-38*a*c*d^2+25*b*c*d^2+18*c^2*d^2+25*a*d^3-32*b*d^3+29*c*d^3+27*d^4+37*a^3*e+17*b^3*e+35*a^2*c*e+31*b^2*c*e-a*c^2*e+26*c^3*e-12*a^2*d*e+41*b^2*d*e-2*a*c*d*e+48*b*c*d*e-24*c^2*d*e+31*a*d^2*e-2*b*d^2*e-31*c*d^2*e-19*d^3*e+17*a^2*e^2-21*b^2*e^2+33*a*c*e^2-31*b*c*e^2+37*c^2*e^2-11*a*d*e^2+b*d*e^2-13*c*d*e^2-12*d^2*e^2-47*a*e^3+47*b*e^3-14*c*e^3+9*d*e^3-28*e^4, e^5, d*e^4, c*e^4, b*e^4, a*e^4, d^2*e^3, c*d*e^3, b*d*e^3, a*d*e^3, c^2*e^3, b*c*e^3, a*c*e^3, b^2*e^3, a^2*e^3, d^3*e^2, c*d^2*e^2, b*d^2*e^2, a*d^2*e^2, c^2*d*e^2, b*c*d*e^2, a*c*d*e^2, b^2*d*e^2, a^2*d*e^2, c^3*e^2, b*c^2*e^2, a*c^2*e^2, b^2*c*e^2, a^2*c*e^2, b^3*e^2, a^3*e^2, d^4*e, c*d^3*e, b*d^3*e, a*d^3*e, c^2*d^2*e, b*c*d^2*e, a*c*d^2*e, b^2*d^2*e, a^2*d^2*e, c^3*d*e, b*c^2*d*e, a*c^2*d*e, b^2*c*d*e, a^2*c*d*e, b^3*d*e, a^3*d*e, c^4*e, b*c^3*e, a*c^3*e, b^2*c^2*e, a^2*c^2*e, b^3*c*e, a^3*c*e, b^4*e, d^5, c*d^4, b*d^4, a*d^4, c^2*d^3, b*c*d^3, a*c*d^3, b^2*d^3, a^2*d^3, c^3*d^2, b*c^2*d^2, a*c^2*d^2, b^2*c*d^2, a^2*c*d^2, b^3*d^2, a^3*d^2, c^4*d, b*c^3*d, a*c^3*d, b^2*c^2*d, a^2*c^2*d, b^3*c*d, a^3*c*d, b^4*d, c^5, b*c^4, a*c^4, b^2*c^3, a^2*c^3, b^3*c^2, a^3*c^2, b^4*c]
+</basis>
+

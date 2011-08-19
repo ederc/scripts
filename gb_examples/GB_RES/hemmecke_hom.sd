@@ -1,0 +1,24 @@
+<Type>
+INTPS
+</Type>
+<Key>
+hemmecke_hom
+</Key>
+<basis>
+  [-z^10+t^10+t^9*x,y^4+z^2*t^2+y^3*x-t*x^3,w^15+y^6*t^9-w^11*x^4]
+</basis>
+<char>
+  0
+</char>
+<vars>
+  [z, w, y, t, x]
+</vars>
+<dlist>
+  [10,4,15]
+</dlist>
+<isHomog>
+1
+</isHomog>
+<llist>
+  [3,4,3]
+</llist>

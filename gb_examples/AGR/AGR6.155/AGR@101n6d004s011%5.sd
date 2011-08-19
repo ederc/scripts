@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n6d004s011%5</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e,f,g]
+</vars>
+<basis>
+  [b*g-26*c*g-30*d*g-19*e*g-27*f*g, a*g-2*c*g-16*d*g+42*e*g-25*f*g, e*f+c*g+33*d*g+47*e*g+19*f*g, d*f-31*c*g-49*d*g-29*e*g+7*f*g, c*f+14*c*g+30*d*g-42*e*g-3*f*g, b*f+19*c*g-7*d*g+34*e*g-47*f*g, a*f+44*c*g+3*d*g+33*e*g+20*f*g, d*e-11*c*g+38*d*g-47*e*g+19*f*g, c*e-9*c*g+28*d*g+46*e*g+35*f*g, b*e-14*c*g-18*d*g-43*e*g-27*f*g, a*e-44*c*g+42*d*g-40*e*g+41*f*g, c*d-26*c*g-14*d*g-23*e*g-39*f*g, b*d+21*c*g-7*d*g-27*e*g+12*f*g, a*d-c*g-42*d*g+38*e*g+4*f*g, b*c-37*c*g-5*d*g+50*e*g-9*f*g, a*c-43*c*g+9*d*g-10*e*g+43*f*g, a*b+12*c*g-46*d*g+e*g+32*f*g, g^4, f*g^3, e*g^3, d*g^3, c*g^3, f^4, e^4, d^4, c^4, b^4, a^4]
+</basis>
+

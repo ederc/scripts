@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n4d008s012%5</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e]
+</vars>
+<basis>
+  [b*c-4*a*d-41*b*d-15*c*d+30*a*e-32*b*e-14*c*e-26*d*e, a*c-35*a*d+24*b*d+30*c*d-8*a*e-21*b*e+4*c*e+5*d*e, a*b+34*a*d+33*b*d+28*c*d+31*a*e+39*b*e+15*c*e+21*d*e, e^7, d*e^6, c*e^6, b*e^6, a*e^6, d^2*e^5, c*d*e^5, b*d*e^5, a*d*e^5, c^2*e^5, b^2*e^5, a^2*e^5, d^3*e^4, c*d^2*e^4, b*d^2*e^4, a*d^2*e^4, c^2*d*e^4, c^3*e^4, b^3*e^4, a^3*e^4, d^4*e^3, c*d^3*e^3, b*d^3*e^3, a*d^3*e^3, c^2*d^2*e^3, c^4*e^3, b^4*e^3, a^4*e^3, d^5*e^2, c*d^4*e^2, b*d^4*e^2, a*d^4*e^2, c^2*d^3*e^2, c^5*e^2, b^5*e^2, a^5*e^2, d^6*e, c*d^5*e, b*d^5*e, a*d^5*e, c^2*d^4*e, c^6*e, b^6*e, a^6*e, d^7, c*d^6, b*d^6, a*d^6, c^2*d^5, c^7, b^7, a^7]
+</basis>
+

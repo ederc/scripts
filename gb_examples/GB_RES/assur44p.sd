@@ -1,0 +1,24 @@
+<Type>
+INTPS
+</Type>
+<Key>
+assur44p
+</Key>
+<basis>
+  [ca^2+sa^2-1,cb^2+sb^2-1,cc^2+sc^2-1,cd^2+sd^2-1,8*ca*cb*cc+8*cb*cc*sa-8*ca*cc*sb+8*cc*sa*sb-8*ca*cb*sc+8*cb*sa*sc-8*ca*sb*sc-8*sa*sb*sc-16*ca*cb+24*cb*cc+12*cb*sa-12*ca*sb-24*cc*sb-16*sa*sb-24*cb*sc-24*sb*sc+24*ca-48*cb-4*cc-36*sb+28*sc+48,-8*ca*cb*cd+16*cb*cd*sa-16*ca*cd*sb-8*cd*sa*sb+16*ca*cb*sd+8*cb*sa*sd-8*ca*sb*sd+16*sa*sb*sd+8*ca*cb-32*cb*cd+12*cb*sa-12*ca*sb+86*cd*sb+8*sa*sb-86*cb*sd-32*sb*sd-28*ca-73*cb+16*cd-30*sa+12*sb+28*sd+112]
+</basis>
+<char>
+  0
+</char>
+<vars>
+  [ca, cb, cc, cd, sa, sb, sc, sd]
+</vars>
+<dlist>
+  [2,2,2,2,3,3]
+</dlist>
+<isHomog>
+0
+</isHomog>
+<llist>
+  [3,3,3,3,22,23]
+</llist>

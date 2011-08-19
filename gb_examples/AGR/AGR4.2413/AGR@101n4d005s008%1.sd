@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n4d005s008%1</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e]
+</vars>
+<basis>
+  [a*e-3*b*e-26*c*e+28*d*e, c*d-19*b*e-29*c*e+47*d*e, b*d-32*b*e-23*c*e-47*d*e, a*d+38*b*e-5*c*e-34*d*e, b*c-20*b*e+43*c*e-24*d*e, a*c-34*b*e-50*c*e-18*d*e, a*b+47*b*e+16*c*e+37*d*e, e^5, d*e^4, c*e^4, b*e^4, d^5, c^5, b^5, a^5]
+</basis>
+

@@ -1,0 +1,24 @@
+<Type>
+INTPS
+</Type>
+<Key>
+ilias_k_3
+</Key>
+<basis>
+  [k*s^2-2*k*s-4*k*p+2*k*f+k-2*f,2*F*k*s^2-S*k*s^2+S*k*s-8*F*k*p+4*S*k*p-2*th*k+2*S*s-4*th,-F^2*k+F*S*k-F*S+S^2-P*k+2*F-2*P-S,th^2*s-th*S*p-P*s*p-2,P^2*p^3-1,F^2*f^3-1,-th*S*s+P*s^2+S^2*p+th^2-4*P*p,k-3]
+</basis>
+<char>
+  0
+</char>
+<vars>
+  [F, th, P, S, k, s, p, f]
+</vars>
+<dlist>
+  [3,4,3,3,5,5,3,1]
+</dlist>
+<isHomog>
+0
+</isHomog>
+<llist>
+  [6,8,8,4,2,2,5,2]
+</llist>

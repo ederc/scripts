@@ -1,0 +1,10 @@
+<Type>INTPS/RES</Type>
+<Key>AGR@101n4d005s014%1</Key>
+<char>101</char>
+<vars>
+  [a,b,c,d,e]
+</vars>
+<basis>
+  [a*b-3*a*c+3*b*c+25*a*d-14*b*d+26*c*d+3*a*e-19*b*e-27*c*e+5*d*e, a^3-30*b^3+5*a^2*c-6*b^2*c-46*a*c^2-19*b*c^2-30*c^3-32*a^2*d+38*b^2*d+29*a*c*d+40*b*c*d+26*c^2*d+41*a*d^2-33*b*d^2-27*c*d^2+d^3-31*a^2*e-45*b^2*e-43*a*c*e+37*b*c*e+2*c^2*e+18*a*d*e+29*b*d*e+8*c*d*e+16*d^2*e-50*a*e^2+22*b*e^2+c*e^2+3*d*e^2-42*e^3, e^4, d*e^3, c*e^3, b*e^3, a*e^3, d^2*e^2, c*d*e^2, b*d*e^2, a*d*e^2, c^2*e^2, b*c*e^2, a*c*e^2, b^2*e^2, a^2*e^2, d^3*e, c*d^2*e, b*d^2*e, a*d^2*e, c^2*d*e, b*c*d*e, a*c*d*e, b^2*d*e, a^2*d*e, c^3*e, b*c^2*e, a*c^2*e, b^2*c*e, a^2*c*e, b^3*e, d^4, c*d^3, b*d^3, a*d^3, c^2*d^2, b*c*d^2, a*c*d^2, b^2*d^2, a^2*d^2, c^3*d, b*c^2*d, a*c^2*d, b^2*c*d, a^2*c*d, b^3*d, c^4, b*c^3, a*c^3, b^2*c^2, a^2*c^2, b^3*c]
+</basis>
+
