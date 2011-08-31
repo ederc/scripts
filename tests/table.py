@@ -190,8 +190,7 @@ for k in data:
     tex.write('Number of critical pairs not detected by the respective \
 criteria used.')
   elif k == 'totalRed':
-    tex.write('Number of all reduction steps throughout the computations \
-of the algorithms.')
+    tex.write('Number of single reduction steps throughout the computations.')
   elif k == 'zero':
     tex.write('Number of zero reductions computed by the algorithms.')
   elif k == 'time':
