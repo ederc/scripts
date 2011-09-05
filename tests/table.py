@@ -10,7 +10,7 @@ def natural_key(string_):
 
 import glob
 from random import choice
-from operator import itemgetter
+import operator
 
 # get number of examples computed
 pathtst = '*.tst'
@@ -81,22 +81,22 @@ for k in dic:
         val = ''.join(i for i in l if i.isdigit())
         if k == 'time' and val != '':
           val = long(val)/1000.0
-          data[k][ex][tmp[0]]=format(val,',.3f')
+          data[k][ex][tmp[0]]=val
         elif k == 'memory' and val != '':
           val = (int(val)/1048576.0)
-          data[k][ex][tmp[0]]=format(val,',.3f')
+          data[k][ex][tmp[0]]=val
         elif k == 'singleRed' and val != '':
           val = int(val)
-          data[k][ex][tmp[0]]=format(val,',')
+          data[k][ex][tmp[0]]=val
         elif k == 'totalRed' and val != '':
           val = int(val)
-          data[k][ex][tmp[0]]=format(val,',')
+          data[k][ex][tmp[0]]=val
         elif k == 'zero' and val != '':
           val = int(val)
-          data[k][ex][tmp[0]]=format(val,',')
+          data[k][ex][tmp[0]]=val
         elif k == 'size' and val != '':
           val = int(val)
-          data[k][ex][tmp[0]]=format(val,',')
+          data[k][ex][tmp[0]]=val
     f.close()
 
 print '---------------'
@@ -104,20 +104,41 @@ print data
 print '---------------'
 # sort data lists by respective keys to print their values in the 
 # correct colors
-for iter in ['singleRed','totalRed','zero','time','memory','size']:
+for iter in ['time','memory']:
   for ex in examples: 
     col = 1
     tempDat = data[iter][ex]
     tempDatTmp = ''
-    for key,val in sorted(tempDat.iteritems(), key=lambda\
-    (k,v):(v,k)):
-      print tempDat[key] + '---' + tempDatTmp
+    
+    for key,val in sorted(tempDat.iteritems(), key=operator.itemgetter(1)):
+    #for key,val in sorted(tempDat.iteritems(), key=lambda\
+    #(k,v):(v,k)):
+      #print tempDat[key] + '---' + tempDatTmp
       if tempDat[key] == tempDatTmp:
-        tempDat[key]= '{\color{' + str(colTmp) + '}' + val + '}'
+        tempDat[key]= '{\color{' + str(colTmp) + '}' + format(val,',.3f') + '}'
         col += 1
       else:
         tempDatTmp = tempDat[key]
-        tempDat[key]= '{\color{' + str(col) + '}' + val + '}'
+        tempDat[key]= '{\color{' + str(col) + '}' + format(val,',.3f') + '}'
+        colTmp = col
+        col += 1
+
+for iter in ['singleRed','totalRed','zero','size']:
+  for ex in examples: 
+    col = 1
+    tempDat = data[iter][ex]
+    tempDatTmp = ''
+    
+    for key,val in sorted(tempDat.iteritems(), key=operator.itemgetter(1)):
+    #for key,val in sorted(tempDat.iteritems(), key=lambda\
+    #(k,v):(v,k)):
+      #print tempDat[key] + '---' + tempDatTmp
+      if tempDat[key] == tempDatTmp:
+        tempDat[key]= '{\color{' + str(colTmp) + '}' + format(val,',') + '}'
+        col += 1
+      else:
+        tempDatTmp = tempDat[key]
+        tempDat[key]= '{\color{' + str(col) + '}' + format(val,',') + '}'
         colTmp = col
         col += 1
 
@@ -171,8 +192,8 @@ for k in data:
     tex.write('\\begin{table}\n\\begin{centering}\n\
   \t\\begin{tabular}{|c|c|c|c|c|c|}\n\t\t\hline\n\
   \t\tTest case & $\sigstd$ & $\sigstdr$ \
-  & $\\ap$ & $\mm$ \
-  & $\ggv$\\\ \n\t\t\\hline\n\t\t\\hline\n')
+  & $\\ap$ & $\mm$ & $\ggv$ \\\ \
+  \n\t\t\\hline\n\t\t\\hline\n')
     
   # we insert the data and sort it by the names of the examples
   # using the above defined natural sort key such that, for 
@@ -181,7 +202,7 @@ for k in data:
       tex.write('\t\t' + l)
       for m in data[k][l]:
 
-        tex.write(' & ' + data[k][l][m])
+        tex.write(' & ' + str(data[k][l][m]))
       tex.write('\\\ \n\t\t\\hline\n')
     tex.write('\t\\end{tabular}\n\t\\par\n\\end{centering}\n\n\\caption{')
 # fills the caption of the tables depending on the corresponding
@@ -190,14 +211,15 @@ for k in data:
     tex.write('Number of critical pairs not detected by the respective \
 criteria used.')
   elif k == 'totalRed':
-    tex.write('Number of single reduction steps throughout the computations.')
+    tex.write('Number of all reduction steps throughout the computations \
+of the algorithms.')
   elif k == 'zero':
     tex.write('Number of zero reductions computed by the algorithms.')
   elif k == 'time':
-    tex.write('Time needed to compute a standard basis of the respective test
+    tex.write('Time needed to compute a standard basis of the respective test \
 case, given in seconds.')
   elif k == 'memory':
-    tex.write('Memory used to compute a standard basis of the respective test
+    tex.write('Memory used to compute a standard basis of the respective test \
 case, given in Megabyte.')
   elif k == 'size':
     tex.write('Size of the resulting standard basis.')
