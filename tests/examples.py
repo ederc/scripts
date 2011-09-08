@@ -132,17 +132,25 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         tex.write(' & &{} ')
         w = len(s)
         while w>linelength:
-          idx1 = s.find("+",linelength-10)
-          idx2 = s.find("-",linelength-10)
-          idx = min(idx1,idx2)
-          if idx < 0:
-            idx = max(idx1,idx2)
+          idx = -1
+          gap = 0
+          while idx == -1:
+            idx1 = s.find("+",linelength-10-gap)
+            print idx1
+            idx2 = s.find("-",linelength-10-gap)
+            print idx2
+            idx = min(idx1,idx2)
+            if idx < 0:
+              idx = max(idx1,idx2)
+            gap = gap + 5
           sp = s[:idx+1]
           s = s[(idx+1):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
           tex.write('{\\tt '+ sp + '}\\\ \n')
           tex.write(' & & ')
           w = len(s)
+          print s
+          print idx, w, linelength
         s = s.replace('^','\\mbox{\\textasciicircum}')
         tex.write('{\\tt '+ s + '}\\\ \n')
     else:
