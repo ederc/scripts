@@ -96,10 +96,12 @@ for k in sorted(ex.iterkeys(),key=natural_key):
     sp = varstr[:idx+1]
     varstr = varstr[(idx+1):]
     sp = sp.replace('^','\\mbox{\\textasciicircum}')
+    sp = sp.replace('*',' \\cdot ')
     tex.write('{\\tt '+ sp + '}\\\ \n')
     tex.write(' & ')
     w = len(varstr)
   varstr = varstr.replace('^','\\mbox{\\textasciicircum}')
+  varstr = varstr.replace('*',' \\cdot ')
   tex.write('{\\tt '+ varstr + '} \n')
   tex.write('\\end{array}\n$\n')
   tex.write('\\begin{center}\n')
@@ -116,6 +118,7 @@ for k in sorted(ex.iterkeys(),key=natural_key):
       w = len(s)
       if w<=linelength:
         s = s.replace('^','\\mbox{\\textasciicircum}')
+        s = s.replace('*',' \\cdot ')
         tex.write('{\\tt '+ s + '}\\\ \n')
       else:
         idx1 = s.find("+",linelength-10)
@@ -128,6 +131,7 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         # need to find the index of the next + or -
         # to cut at this point! TOODOO
         sp = sp.replace('^','\\mbox{\\textasciicircum}')
+        sp = sp.replace('*',' \\cdot ')
         tex.write('{\\tt '+ sp + '}\\\ \n')
         tex.write(' & &{} ')
         w = len(s)
@@ -136,9 +140,7 @@ for k in sorted(ex.iterkeys(),key=natural_key):
           gap = 0
           while idx == -1:
             idx1 = s.find("+",linelength-10-gap)
-            print idx1
             idx2 = s.find("-",linelength-10-gap)
-            print idx2
             idx = min(idx1,idx2)
             if idx < 0:
               idx = max(idx1,idx2)
@@ -146,18 +148,19 @@ for k in sorted(ex.iterkeys(),key=natural_key):
           sp = s[:idx+1]
           s = s[(idx+1):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
+          sp = sp.replace('*',' \\cdot ')
           tex.write('{\\tt '+ sp + '}\\\ \n')
           tex.write(' & & ')
           w = len(s)
-          print s
-          print idx, w, linelength
         s = s.replace('^','\\mbox{\\textasciicircum}')
+        s = s.replace('*',' \\cdot ')
         tex.write('{\\tt '+ s + '}\\\ \n')
     else:
       tex.write('{\\tt ' + sl[0] + '} & {\\tt =} & ')
       w = len(s)
       if w<=linelength:
         s = s.replace('^','\\mbox{\\textasciicircum}')
+        s = s.replace('*',' \\cdot ')
         tex.write('{\\tt '+ s + '} \n')
       else:
         idx1 = s.find("+",linelength-10)
@@ -174,18 +177,24 @@ for k in sorted(ex.iterkeys(),key=natural_key):
         tex.write(' & & ')
         w = len(s)
         while w>linelength:
-          idx1 = s.find("+",linelength-10)
-          idx2 = s.find("-",linelength-10)
-          idx = min(idx1,idx2)
-          if idx < 0:
-            idx = max(idx1,idx2)
+          idx = -1
+          gap = 0
+          while idx == -1:
+            idx1 = s.find("+",linelength-10-gap)
+            idx2 = s.find("-",linelength-10-gap)
+            idx = min(idx1,idx2)
+            if idx < 0:
+              idx = max(idx1,idx2)
+            gap = gap + 5
           sp = s[:idx+1]
           s = s[(idx+1):]
           sp = sp.replace('^','\\mbox{\\textasciicircum}')
+          sp = sp.replace('*',' \\cdot ')
           tex.write('{\\tt '+ sp + '}\\\ \n')
           tex.write(' & & ')
           w = len(s)
         s = s.replace('^','\\mbox{\\textasciicircum}')
+        s = s.replace('*',' \\cdot ')
         tex.write('{\\tt '+ s + '} \n')
     i = i+1
 
