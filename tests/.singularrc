@@ -1,0 +1,14 @@
+system("--ticks-per-sec",1000);
+system("--min-time","0.001");
+LIB"f5ex2.lib";
+//cyclicnh(4);
+katsuranh(10);
+//econh(6);
+int t = timer;
+ideal g = std(i);
+charstr(basering);
+varstr(basering);
+ordstr(basering);
+g;
+//printf("Timer: %s",timer-t);
+$
