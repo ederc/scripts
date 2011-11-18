@@ -36,21 +36,32 @@ compare.write('ring r = ('+\
       lines[1].replace('\n','')+'),('+\
       lines[2].replace('\n','')+');\n')
 compare.write('ideal g;\n')
-for i in range(3,len(lines)):
+for i in range(3,len(lines)-2):
   lines[i] = lines[i].replace('\n',';\n')
   compare.write(lines[i])
+timersig = lines[len(lines)-2].replace('\n','')
+sizesig = lines[len(lines)-1].replace('\n','')
 testsig.close()
+
   
 # initialize second ideal
 compare.write('ideal G;\n')
 teststd = open('teststd.txt','r')
 lines = teststd.readlines()
-for i in range(3,len(lines)):
+for i in range(3,len(lines)-2):
   lines[i] = lines[i].replace('\n',';\n')
   lines[i] = lines[i].replace(lines[i][0],'G')
   compare.write(lines[i])
+timerstd = lines[len(lines)-2].replace('\n','')
+sizestd = lines[len(lines)-1].replace('\n','')
 teststd.close()
 
+maxtime = max(int(len(timerstd)),int(len(timersig)))
+maxsize = max(int(len(sizestd)),int(len(sizesig)))
+strstd = 'Time %*s  --  Size %*s  ( STD )' % (maxtime,timerstd,maxsize,sizestd)
+strsig = 'Time %*s  --  Size %*s  ( SIGNATURE-BASED )' % (maxtime,timersig,maxsize,sizesig)
+print strstd
+print strsig
 # reduce the standard basis against each other
 # store the result in a list l
 # if there exists at least one nonzero entry in l
