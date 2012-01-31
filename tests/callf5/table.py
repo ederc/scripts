@@ -59,16 +59,18 @@ for k in dic:
   # now we start the loop over all results
   for f in res:
     tmp = f.split('.')
-    if tmp[0] == 'sigstd':
+    if tmp[0] == 'ggv':
       tmp[0] = 1
-    elif tmp[0] == 'sigstdr':
+    elif tmp[0] == 'ggv_c':
       tmp[0] = 2
-    elif tmp[0] == 'ap':
+    elif tmp[0] == 'f5c':
       tmp[0] = 3
-    elif tmp[0] == 'mm':
+    elif tmp[0] == 'f5c_c':
       tmp[0] = 4
-    elif tmp[0] == 'ggv':
+    elif tmp[0] == 'f5e':
       tmp[0] = 5
+    elif tmp[0] == 'f5e_c':
+      tmp[0] = 6
 
     f = open(f,'r')
     lines = f.readlines()
@@ -161,10 +163,11 @@ for k in data:
     tex = k + '.tex'
     tex = open(tex,'w')
     tex.write('\\begin{table}\n\\begin{centering}\n\
-  \t\\begin{tabular}{|c|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|D{.}{.}{-1}|}\n\t\t\hline\n\
-  \t\tTest case & \\multicolumn{1}{c|}{$\sigstd$} & \\multicolumn{1}{c|}{$\sigstdr$} \
-  & \\multicolumn{1}{c|}{$\\ap$} & \\multicolumn{1}{c|}{$\mm$} \
-  & \\multicolumn{1}{c|}{$\ggv$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
+  \t\\begin{tabular}{|c|D{.}{.}{3}|D{.}{.}{3}|D{.}{.}{3}|D{.}{.}{3}|D{.}{.}{3}|D{.}{.}{3}|}\n\t\t\hline\n\
+  \t\tTest case & \\multicolumn{1}{c|}{$\ggv$} & \\multicolumn{1}{c|}{$\ggvc$} \
+  & \\multicolumn{1}{c|}{$\\ffc$} & \\multicolumn{1}{c|}{$\\ffcc$} & \
+  \\multicolumn{1}{c|}{$\\ffe$} \
+  & \\multicolumn{1}{c|}{$\\ffec$}\\\ \n\t\t\\hline\n\t\t\\hline\n')
     
   # we insert the data and sort it by the names of the examples
   # using the above defined natural sort key such that, for 
@@ -190,9 +193,9 @@ for k in data:
     tex = k + '.tex'
     tex = open(tex,'w')
     tex.write('\\begin{table}\n\\begin{centering}\n\
-  \t\\begin{tabular}{|c|c|c|c|c|c|}\n\t\t\hline\n\
-  \t\tTest case & $\sigstd$ & $\sigstdr$ \
-  & $\\ap$ & $\mm$ & $\ggv$ \\\ \
+  \t\\begin{tabular}{|c|c|c|c|c|c|c|}\n\t\t\hline\n\
+  \t\tTest case & $\ggv$ & $\ggvc$ \
+  & $\\ffc$ & $\\ffcc$ & $\\ffe$ & $\\ffec$\\\ \
   \n\t\t\\hline\n\t\t\\hline\n')
     
   # we insert the data and sort it by the names of the examples
