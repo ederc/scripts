@@ -5,7 +5,6 @@ import os
 
 # get number of examples computed
 
-print "here"
 f = open('.singularrc','w')
 f.write('\
 system("--min-time", "0.001");\n\
@@ -44,5 +43,4 @@ ideal f = sba(i,0,1);\n\
 size(f);\n\
 printf("Time: %s", timer-t);\n\
 $')
-print "there"
 f.close()
