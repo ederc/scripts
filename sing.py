@@ -35,7 +35,7 @@ while i < len(benchs):
     f.close()
 
     os.system('./Singular -q > temp.txt')
-    testfile = benchs[i]+'.res'
+    testfile = 'tests/'+benchs[i]+'.res'
     f = open(testfile,'a')
     g = open('temp.txt','r')
     lines = g.readlines()
