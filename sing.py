@@ -7,7 +7,7 @@ benchs = 'cyclicnh(7)','cyclicn(7)','f744h()','f744()','katsuranh(11)',\
 'katsuran(11)','katsuranh(12)','katsuran(12)','cyclicnh(8)','cyclicn(8)',\
 'f855h()','f855()','econh(10)','econ(10)','econh(11)','econ(11)','noon8h()',\
 'noon8()','noon9h()','noon9()'
-tests = 'sba(i,1,0)','sba(i,1,1)','sba(i,0,0)','sba(i,0,0)'
+tests = 'sba(i,1,0)','sba(i,1,1)','sba(i,0,0)','sba(i,0,1)'
 names = 'sprintf("--- sba(inc,f5) computing ---");\n',\
 'sprintf("--- sba(inc,arri) computing ---");\n','sprintf("--- sba(noninc,f5)\
 computing ---");\n','sprintf("--- sba(noninc,arri) computing ---");\n'
