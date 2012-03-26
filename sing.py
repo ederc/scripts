@@ -29,8 +29,8 @@ while i < len(benchs):
   int t = timer;\n'+\
   names[j]+'\
   ideal f = '+tests[j]+';\n\
-  printf("Size of basis:    %s",size(f));\n\
-  printf("Time:             %s", timer-t);\n\
+  printf("SIZE OF BASIS:    %s",size(f));\n\
+  printf("TIME:             %s", timer-t);\n\
   $')
     f.close()
 
