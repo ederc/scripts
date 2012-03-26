@@ -8,9 +8,9 @@ benchs = 'cyclicnh(7)','cyclicn(7)','f744h()','f744()','katsuranh(11)',\
 'f855h()','f855()','econh(10)','econ(10)','econh(11)','econ(11)','noon8h()',\
 'noon8()','noon9h()','noon9()'
 tests = 'sba(i,1,0)','sba(i,1,1)','sba(i,0,0)','sba(i,0,1)'
-names = 'sprintf("--- sba(inc,f5) computing ---");\n',\
-'sprintf("--- sba(inc,arri) computing ---");\n','sprintf("--- sba(noninc,f5)\
-computing ---");\n','sprintf("--- sba(noninc,arri) computing ---");\n'
+names = 'sprintf("--- SBA(INC,F5) COMPUTING ---");\n',\
+'sprintf("--- SBA(INC,ARRI) COMPUTING ---");\n','sprintf("--- SBA(NONINC,F5)\
+COMPUTING ---");\n','sprintf("--- SBA(NONINC,ARRI) COMPUTING ---");\n'
 # get number of examples computed
 
 i = 0
