@@ -129,9 +129,13 @@ f.close()
 # start generating output file
 os.system('touch '+args.output+'.ideal')
 f = open(args.output+'.ideal', 'w')
+
+# check for homogenization again
+if args.homog:
+  args.nvariables += 1
 f.write(args.char+' '+str(args.nvariables))
 i = 0
-while i < int(args.nvariables):
+while i < args.nvariables:
   f.write(' 1')
   i += 1
 f.write('\n')
