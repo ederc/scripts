@@ -86,6 +86,7 @@ if os.path.exists('.singularrc'):
 f = open('.singularrc', 'w')
 f.write('\
 option("noredefine");\n\
+option("redSB");\n\
 LIB"poly.lib";\nLIB"random.lib";\n\
 ring RR = '+args.char+', (')
 
