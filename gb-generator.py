@@ -135,7 +135,7 @@ if args.homog:
   args.nvariables += 1
 f.write(args.char+' '+str(args.nvariables))
 i = 0
-while i < args.nvariables:
+while i <= args.nvariables:
   f.write(' 1')
   i += 1
 f.write('\n')
