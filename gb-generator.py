@@ -143,6 +143,9 @@ f.close()
 # get rid of generated ".singuarrc" file
 os.remove('.singularrc')
 
+# get rid of temporary file
+os.remove(args.output+'.tmp.ideal')
+
 # restore old ".singularrc" if it existed
 if old_singularrc == 1:
   shutil.copyfile('.singularrc-'+hash_value, '.singularrc')
