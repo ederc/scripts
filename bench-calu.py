@@ -98,13 +98,11 @@ else:
     threads.append(base**exp)
     exp += 1
 
-# if increasing matrix size, then ensure incrementer to be useful
-if int(args.alg) == 2 and int(args.inc) == -1:
-  args.inc = 0
-
 #range of rows and columns if increasing size
-rowSizes  = list()
-colSizes  = list()
+blockSizes  = list()
+layoutSizes = list()
+rowSizes    = list()
+colSizes    = list()
 
 # list of all methods, sequential only if start_threads == 1
 methods = ['OpenBLAS']
@@ -123,7 +121,8 @@ for i in range(0,len(methodsReal)):
 # generate hash value if needed
 hash_value = os.urandom(16).encode('hex')
 
-folder_name = "test-"+str(hash_value)
+folder_name = "test-"+\
+args.rowsa+'-'+args.colsa+'-'+str(args.blocksize)+'-'+args.layout
 
 if not os.path.exists(folder_name):
   os.makedirs(folder_name)
@@ -131,12 +130,15 @@ if not os.path.exists(folder_name):
 os.chdir(os.getcwd()+"/"+folder_name)
 
 # generate random matrices without timestamp if no increasing is done
-if int(args.inc) == -1:
 
-  bench_file = "bench-"+str(hash_value)
+# incresing threads
+if int(args.alg) == 1:
+
+  bench_file =\
+  "bench-"+args.rowsa+'-'+args.colsa+'-'+str(args.blocksize)+'-'+args.layout
   f = open(bench_file,"w")
 
-  strstr = '../test_calu '+args.rowsa+' '+args.colsa+' '+args.blocksize
+  strstr = '../../test_calu '+args.rowsa+' '+args.colsa+' '+str(args.blocksize)
 
   thrds_str = str(threads)
   thrds_str = thrds_str.replace('[','')
@@ -147,15 +149,14 @@ if int(args.inc) == -1:
   f.write(thrds_str+'\r\n')
   f.close()
 
-  # sequential computation, only if start_threads == 1
   for i in threads:
-    print(strstr+' '+str(i)+' '+args.layout+' >> '+bench_file+'...')
-    os.system(strstr+' '+str(i)+' '+args.layout+' >> '+bench_file)
+    print(strstr+' '+str(i)+' '+args.layout+' 1 >> '+bench_file+'...')
+    os.system(strstr+' '+str(i)+' '+args.layout+' 1 >> '+bench_file)
     print 'Done at '+time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
 
-# generate 10 random matrices without timestamp if increasing is done
-# works only for GEP
-else:
+# incresing matrices
+if int(args.alg) == 2:
+
   if int(args.inc) != 0:
     for k in range(0,int(args.count)+1):
       rows = int(args.rowsa) + k * int(args.inc)
@@ -181,15 +182,81 @@ else:
   f.write(thrds_str+'\r\n')
   f.close()
 
-  # sequential computation, only if max_threads == 1
-  block = 256
   for k in range(0,int(args.count)+1):
-    strstr = '../test_calu '+str(rowSizes[k])+' '+str(colSizes[k])+' '+\
-    args.blocksize+' '+str(max_threads)+' '+args.layout+' 1'+' >> '+bench_file
+    strstr = '../../test_calu '+str(rowSizes[k])+' '+str(colSizes[k])+' '+\
+    str(args.blocksize)+' '+str(max_threads)+' '+args.layout+' 1'+' >> '+bench_file
 
     print(strstr+'...')
     os.system(strstr)
     print 'Done at '+time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
+
+# incresing blocksizes
+if int(args.alg) == 3:
+
+  if int(args.inc) != 0:
+    for k in range(0,int(args.count)+1):
+      blocks = int(args.blocksize) + k * int(args.inc)
+      blockSizes.append(blocks)
+  else:
+    for k in range(0,int(args.count)+1):
+      blocks = (2**k) * int(args.blocksize) 
+      blockSizes.append(blocks)
+
+  bench_file = "bench-"+str(hash_value)
+  f = open(bench_file,"w")
+
+  thrds_str = str(threads)
+  thrds_str = thrds_str.replace('[','')
+  thrds_str = thrds_str.replace(']','')
+  thrds_str = thrds_str
+
+  f.write(args.rowsa+','+args.colsa+','+args.inc+'\r\n')
+  f.write(thrds_str+'\r\n')
+  f.close()
+
+  # sequential computation, only if max_threads == 1
+  for k in range(0,int(args.count)+1):
+    if int(blockSizes[k]) < int(min(args.rowsa,args.colsa)):
+      strstr = '../../test_calu '+args.rowsa+' '+args.colsa+' '+\
+      str(blockSizes[k])+' '+str(max_threads)+' '+args.layout+' 1'+' >> '+bench_file
+
+      print(strstr+'...')
+      os.system(strstr)
+      print 'Done at '+time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
+
+# incresing layout
+if int(args.alg) == 4:
+
+  if int(args.inc) != 0:
+    for k in range(0,int(args.count)+1):
+      layouts = int(args.layout) + k * int(args.inc)
+      layoutSizes.append(layouts)
+  else:
+    for k in range(0,int(args.count)+1):
+      layouts = (2**k) * int(args.layout) 
+      layoutSizes.append(layouts)
+
+  bench_file = "bench-"+str(hash_value)
+  f = open(bench_file,"w")
+
+  thrds_str = str(threads)
+  thrds_str = thrds_str.replace('[','')
+  thrds_str = thrds_str.replace(']','')
+  thrds_str = thrds_str
+
+  f.write(args.rowsa+','+args.colsa+','+args.inc+'\r\n')
+  f.write(thrds_str+'\r\n')
+  f.close()
+
+  # sequential computation, only if max_threads == 1
+  for k in range(0,int(args.count)+1):
+    if int(layoutSizes[k]) / max_threads <= 1:
+      strstr = '../../test_calu '+args.rowsa+' '+args.colsa+' '+\
+      str(args.blocksize)+' '+str(max_threads)+' '+str(layoutSizes[k])+' 1'+' >> '+bench_file
+
+      print(strstr+'...')
+      os.system(strstr)
+      print 'Done at '+time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
 
 ##############################################
 # plotting part of the script
@@ -197,7 +264,7 @@ else:
 
 
 if args.plot:
-  file_name = 'bench-'+str(hash_value)
+  file_name = bench_file
   # read lines of the benchmark files
   f = open(file_name)
   lines = f.readlines()
@@ -208,16 +275,27 @@ if args.plot:
   # 2. threads for plot, stored in the first line of bench file
   dimensions = lines[0].strip().replace(' ','').split(',')
   
-  if int(args.inc) == -1:
+  if int(args.alg) == 1:
     # second line are the thread settings used
     plot_threads = lines[1].strip().replace(' ','').split(',')
-  else:
+  if int(args.alg) == 2:
     # if inc is set we cheat a bit and still use plot_threads and threads thus we
     # do not need to change the code for the plotting below:
-    # There are 10 increasements of the sizes, that means, we have 11 values:
     plot_threads = []
     for k in range(0,int(args.count)+1):
       plot_threads.append(str(k))
+  if int(args.alg) == 3:
+    # if inc is set we cheat a bit and still use plot_threads and threads thus we
+    # do not need to change the code for the plotting below:
+    plot_threads = []
+    for k in range(0,int(args.count)+1):
+      plot_threads.append(str(blockSizes[k]))
+  if int(args.alg) == 4:
+    # if inc is set we cheat a bit and still use plot_threads and threads thus we
+    # do not need to change the code for the plotting below:
+    plot_threads = []
+    for k in range(0,int(args.count)+1):
+      plot_threads.append(str(layoutSizes[k]))
 
   # get threads for plot, stored in the first line of bench file
   #plot_threads = f.readline().strip().replace(' ','').split(',')
@@ -238,31 +316,55 @@ if args.plot:
   #plot this data
 
   #line style, sequential method only if start_threads == 1
-    stride = 1
-    coloring = ['#057d43']
-    styles = ['-']
-    markers = ['None']
+  stride = 1
+  coloring = ['#057d43']
+  styles = ['-']
+  markers = ['None']
 
   pl.rc('legend',**{'fontsize':5})
   fig = pl.figure()
   ax = fig.add_subplot(111)
   fig.suptitle('Timings: '+file_name, fontsize=10)
-  if int(args.inc) == -1:
+  if int(args.alg) == 1:
     pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-    ' x '+dimensions[1], fontsize=8)
-  else:
+    ' x '+dimensions[1]+'\nBlocksize: '+str(args.blocksize)+
+    '  Layout: '+args.layout, fontsize=8)
+    ax.set_xlabel('Number of threads', fontsize=7)
+  if int(args.alg) == 2:
     if int(args.inc) == 0:
       pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-      ' x '+dimensions[1]+' with dimensions doubled in each step using '+
-      str(max_threads)+' threads', fontsize=8)
+      ' x '+dimensions[1]+' with dimensions doubled in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize)+
+      '  Layout: '+args.layout, fontsize=8)
     else:
       pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-      ' x '+dimensions[1]+' increasing by '+dimensions[2]+' in each step using '+
-      str(max_threads)+' threads', fontsize=8)
-  if int(args.inc) == -1:
-    ax.set_xlabel('Number of threads', fontsize=7)
-  else:
+      ' x '+dimensions[1]+' increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize)+
+      '  Layout: '+args.layout, fontsize=8)
     ax.set_xlabel('Number of increasing steps', fontsize=7)
+  if int(args.alg) == 3:
+    if int(args.inc) == 0:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with blocksize doubled in each step\n'+
+      'Threads: '+str(max_threads)+
+      '  Layout: '+args.layout, fontsize=8)
+    else:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with blocksize increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+
+      '  Layout: '+args.layout, fontsize=8)
+    ax.set_xlabel('Blocksizes', fontsize=7)
+  if int(args.alg) == 4:
+    if int(args.inc) == 0:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with layout doubled in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize), fontsize=8)
+    else:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with layout increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize), fontsize=8)
+    ax.set_xlabel('Layouts', fontsize=7)
+
   ax.set_ylabel('Real time in seconds', fontsize=8)
 
   pl.grid(b=True, which='major', color='k', linewidth=0.3)
@@ -275,8 +377,8 @@ if args.plot:
   #ax.set_xticklabels(group_labels)
   threads_tmp = range(0,len(plot_threads))
   # get right scale for a4 paper size
-  scale_tmp = 38 / (len(plot_threads)) 
-  threads = range(0,38,scale_tmp)
+  scale_tmp = 64 / (len(plot_threads)) 
+  threads = range(0,64,scale_tmp)
   tick_lbs = plot_threads
   ax.xaxis.set_ticks(threads)
   ax.xaxis.set_ticklabels(tick_lbs)
@@ -303,25 +405,55 @@ if args.plot:
 
   pl.savefig('timings-plot.pdf',papertype='a4',orientation='landscape')
 
+  #line style, sequential method only if start_threads == 1
+  stride = 1
+  coloring = ['#cc0033']
+  styles = ['-']
+  markers = ['None']
+
   fig = pl.figure()
   ax = fig.add_subplot(111)
   fig.suptitle('GFLOPS/sec: '+file_name, fontsize=10)
-  if int(args.inc) == -1:
+  if int(args.alg) == 1:
     pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-    ' x '+dimensions[1], fontsize=8)
-  else:
+    ' x '+dimensions[1]+'\nBlocksize: '+str(args.blocksize)+
+    '  Layout: '+args.layout, fontsize=8)
+    ax.set_xlabel('Number of threads', fontsize=7)
+  if int(args.alg) == 2:
     if int(args.inc) == 0:
       pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-      ' x '+dimensions[1]+' with dimensions doubled in each step using '+
-      str(max_threads)+' threads', fontsize=8)
+      ' x '+dimensions[1]+' with dimensions doubled in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize)+
+      '  Layout: '+args.layout, fontsize=8)
     else:
       pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
-      ' x '+dimensions[1]+' increasing by '+dimensions[2]+' in each step using '+
-      str(max_threads)+' threads', fontsize=8)
-  if int(args.inc) == -1:
-    ax.set_xlabel('Number of threads', fontsize=7)
-  else:
+      ' x '+dimensions[1]+' increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize)+
+      '  Layout: '+args.layout, fontsize=8)
     ax.set_xlabel('Number of increasing steps', fontsize=7)
+  if int(args.alg) == 3:
+    if int(args.inc) == 0:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with blocksize doubled in each step\n'+
+      'Threads: '+str(max_threads)+
+      '  Layout: '+args.layout, fontsize=8)
+    else:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with blocksize increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+
+      '  Layout: '+args.layout, fontsize=8)
+    ax.set_xlabel('Blocksizes', fontsize=7)
+  if int(args.alg) == 4:
+    if int(args.inc) == 0:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with layout doubled in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize), fontsize=8)
+    else:
+      pl.title('Tiled GEP double Matrix dimensions: '+dimensions[0]+
+      ' x '+dimensions[1]+' with layout increasing by '+dimensions[2]+' in each step\n'+
+      'Threads: '+str(max_threads)+'  Blocksize: '+str(args.blocksize), fontsize=8)
+    ax.set_xlabel('Layouts', fontsize=7)
+
   ax.set_ylabel('GFLOPS per second', fontsize=8)
 
   pl.grid(b=True, which='major', color='k', linewidth=0.3)
@@ -332,8 +464,8 @@ if args.plot:
   #ax.set_xticklabels(group_labels)
   threads_tmp = range(0,len(plot_threads))
   # get right scale for a4 paper size
-  scale_tmp = 38 / (len(plot_threads)) 
-  threads = range(0,38,scale_tmp)
+  scale_tmp = 64 / (len(plot_threads)) 
+  threads = range(0,64,scale_tmp)
   tick_lbs = plot_threads
   ax.xaxis.set_ticks(threads)
   ax.xaxis.set_ticklabels(tick_lbs)
